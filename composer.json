@@ -1,0 +1,41 @@
+{
+    "name": "zerostechnology/almutasi-php",
+    "description": "Official PHP library for alMutasi.com",
+    "type": "library",
+    "homepage": "https://almutasi.com",
+    "support": {
+        "issues": "https://github.com/zerostechnology/almutasi-php/issues",
+        "source": "https://github.com/zerostechnology/almutasi-php"
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^6.5",
+        "ext-json": "*",
+        "php": ">=7.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Zeros Technology",
+            "email": "admin@zeros.co.id"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Almutasi\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Almutasi\\Laravel\\ServiceProvider"
+            ],
+            "aliases": {
+                "Almutasi": "Almutasi\\Laravel\\Facade"
+            }
+        }
+    }
+}
