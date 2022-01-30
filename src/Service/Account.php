@@ -15,8 +15,6 @@ class Account
 
 	public function balance()
 	{
-		return $this->parent->http->get('account/balance')
-			->getBody()
-			->getContents();
+		return $this->parent->request('GET', 'account/balance');
 	}
 }

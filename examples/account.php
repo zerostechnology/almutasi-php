@@ -15,9 +15,12 @@ $almutasi = new Main($mode, $apiToken, $privateKey);
 // Initialize the library
 $almutasi->init();
 
+// Enable debugging, optional
+// $almutasi->debug();
+
 // Load Account service
 $account = $almutasi->account();
 
 // Get balance
 $balance = $account->balance();
-echo $balance;
+print_r($balance);

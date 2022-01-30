@@ -15,22 +15,22 @@ class Bank
 
 	public function logins(array $query = [])
 	{
-		return $this->parent->http->get('bank/logins?'.http_build_query($query))
-			->getBody()
-			->getContents();
+		$query = http_build_query($query);
+
+		return $this->parent->request('GET', 'bank/logins?'.$query);
 	}
 
 	public function accounts(array $query = [])
 	{
-		return $this->parent->http->get('bank/accounts?'.http_build_query($query))
-			->getBody()
-			->getContents();
+		$query = http_build_query($query);
+
+		return $this->parent->request('GET', 'bank/accounts?'.$query);
 	}
 
 	public function mutations(array $query = [])
 	{
-		return $this->parent->http->get('bank/mutations?'.http_build_query($query))
-			->getBody()
-			->getContents();
+		$query = http_build_query($query);
+
+		return $this->parent->request('GET', 'bank/mutations?'.$query);
 	}
 }
