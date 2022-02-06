@@ -7,13 +7,10 @@ use Almutasi\Support\Helper;
 use Almutasi\Support\Constant;
 
 $mode = Constant::SANDBOX;
-$apiToken = 'your api token is here';
+$apiKey = 'your api key is here';
 $privateKey = 'your private key here';
 
-$almutasi = new Main($mode, $apiToken, $privateKey);
-
-// Initialize the library
-$almutasi->init();
+$almutasi = new Main($mode, $apiKey, $privateKey);
 
 // Enable debugging, optional
 // $almutasi->debug();

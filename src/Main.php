@@ -10,35 +10,31 @@ use Almutasi\Support\Constant;
 class Main
 {
     protected $mode;
-    protected $apiToken;
+    protected $apiKey;
     protected $headers = [];
     protected $debug = false;
 
     public $privateKey;
     public $http;
-    public $initialized = false;
 
-    public function __construct(string $mode = 'sandbox', string $apiToken, string $privateKey)
+    public function __construct(string $mode = 'sandbox', string $apiKey, string $privateKey)
     {
         $this->mode = $mode;
-        $this->apiToken = $apiToken;
+        $this->apiKey = $apiKey;
         $this->privateKey = $privateKey;
-    }
 
-    public function init()
-    {
         $this->http = new Client([
             'base_uri' => ($this->mode === 'sandbox')
                 ? Constant::URL_SANDBOX
                 : Constant::URL_PRODUCTION,
-            'http_errors' => false
+            'http_errors' => false,
+            'allow_redirects' => false,
         ]);
 
-        $this->headers['Authorization'] = 'Bearer '.$this->apiToken;
-
-        $this->initialized = true;
-
-        return $this;
+        $this->headers = array_merge($this->headers, [
+            'Authorization' => 'Bearer '.$this->apiKey,
+            'Accept' => 'application/json'
+        ]);
     }
 
     public function debug()
@@ -50,7 +46,6 @@ class Main
     public function request(string $method, string $path, array $payload = [])
     {
         $method = strtolower($method);
-        $result = new \stdClass();
         $http_status_code = 0;
         $url = null;
 
@@ -101,10 +96,6 @@ class Main
 
     public function __call($method, $args)
     {
-        if (! $this->initialized) {
-            throw new Exception('Please call `init()` method before using another method');
-        }
-
         $camel_case_method = ucwords($method, '_');
         $camel_case_method = str_replace('_', '', $camel_case_method);
 
